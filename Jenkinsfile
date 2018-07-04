@@ -22,9 +22,6 @@ pipeline {
         stage('debug') {
             steps {
                 slackSend color: "$QN_COLOR_NORMAL", message: "Fake message\n\n$QN_SLACK_MSG"
-                sh '''
-                   echo toto
-                '''
             }
             post {
                 failure {
@@ -55,7 +52,7 @@ pipeline {
         stage('tests') {
             steps {
                 sh '''
-                    cd ws
+                    cd workspace
                     ./workspace run_tests
                     ./workspace result_tests
                 '''
@@ -63,7 +60,7 @@ pipeline {
 
             post {
                 always {
-                    junit 'ws/build_release/**/test_results/**/*.xml'
+                    junit 'workspace/build_release/**/test_results/**/*.xml'
                 }
                 success {
                     slackSend color: "$QN_COLOR_SUCCESS", message: "Tests validés\n\n$QN_SLACK_MSG"
@@ -77,7 +74,7 @@ pipeline {
         stage('generate docs') {
             steps {
                 sh '''
-                    cd ws
+                    cd workspace
                     doxygen
                 '''
             }
@@ -96,14 +93,14 @@ pipeline {
             when { branch 'master' }
             steps {
                 sh '''
-                    cd ws
+                    cd workspace
                     tar czvf doc.tar.gz doc/html
                 '''
             }
 
             post {
                 success {
-                    archive 'ws/doc.tar.gz'
+                    archive 'workspace/doc.tar.gz'
                     slackSend color: "$QN_COLOR_SUCCESS", message: "Docs collectées\n\n$QN_SLACK_MSG"
                 }
                 failure {
