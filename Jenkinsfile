@@ -37,7 +37,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Starting prepare"
-                    git clone git@github.com:rhoban/workspace.git
+                    git clone https://github.com/rhoban/workspace.git
                     cd workspace
                     ./workspace setup
                     ./workspace install rhoban/utils
