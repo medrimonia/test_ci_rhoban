@@ -21,19 +21,22 @@ pipeline {
     stages {
         stage('debug') {
             steps {
-//                slackSend color: "$QN_COLOR_NORMAL", message: "Fake message\n\n$QN_SLACK_MSG"
+               sh '''
+                   echo "fake message"
+                   '''
             }
             post {
                 failure {
-//                    slackSend color: "$QN_COLOR_FAIL", message: "Echec `debug`\n\n$QN_SLACK_MSG"
+                   echo "failure message"
+                   '''
                 }
             }
         }
 
         stage('prepare') {
             steps {
-//                slackSend color: "$QN_COLOR_NORMAL", message: "Démarrage du build\n\n$QN_SLACK_MSG"
                 sh '''
+                    echo "Starting prepare"
                     git clone git@github.com:rhoban/workspace.git
                     cd workspace
                     ./workspace setup
@@ -44,7 +47,7 @@ pipeline {
             }
             post {
                 failure {
-                    slackSend color: "$QN_COLOR_FAIL", message: "Echec `prepare`\n\n$QN_SLACK_MSG"
+                echo "Failed to prepare"
                 }
             }
         }
