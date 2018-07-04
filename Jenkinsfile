@@ -23,7 +23,7 @@ pipeline {
             steps {
                 slackSend color: "$QN_COLOR_NORMAL", message: "Démarrage du build\n\n$QN_SLACK_MSG"
                 sh '''
-                    git clone git@github.com/rhoban/workspace
+                    git clone git@github.com:rhoban/workspace.git
                     cd workspace
                     ./workspace setup
                     ./workspace install rhoban/utils
