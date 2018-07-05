@@ -42,7 +42,7 @@ pipeline {
                     cd workspace
                     ./workspace setup
                     '''
-                sh "./workspace install rhoban/utils"
+//                sh "./workspace install rhoban/utils"
             }
             post {
                 failure {
