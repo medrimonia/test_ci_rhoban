@@ -26,13 +26,14 @@ pipeline {
         stage('prepare') {
             steps {
                 sh '''
-                    git config --global user.name "rhobanJenkins"
-                    git config --global user.email "lhofer@labri.fr"
                     git clone https://github.com/rhoban/workspace.git
                     cd workspace    
                     ./workspace setup
                     cat ~/.ssh/id_rsa
-                    ./workspace install rhoban/utils
+                    cd src
+                    mkdir rhoban
+                    cd rhoban
+                    git clone  https://github.com/rhoban/utils.git
                 '''
             }
             post {
