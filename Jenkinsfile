@@ -7,12 +7,6 @@ pipeline {
     options { disableConcurrentBuilds() }
 
     environment {
-        QN_SLACK_MSG = sh(returnStdout: true, script: '''
-            echo "Build #$BUILD_NUMBER (<$JOB_DISPLAY_URL|Voir>)"
-            echo "Branch: $BRANCH_NAME"
-            echo "Auteur: `git show -s --pretty=%an`"
-            echo "Message: `git show -s --pretty=%s`"
-            ''')
         QN_COLOR_FAIL = '#7b0d1e'
         QN_COLOR_SUCCESS = '#44cf6c'
         QN_COLOR_NORMAL= '#439FE0'
@@ -65,12 +59,6 @@ pipeline {
             post {
                 always {
                     junit "workspace/build_release/**/test_results/**/*.xml"
-                }
-                success {
-                    slackSend color: "$QN_COLOR_SUCCESS", message: "Tests validés\n\n$QN_SLACK_MSG"
-                }
-                failure {
-                    slackSend color: "$QN_COLOR_FAIL", message: "Echec `tests`: Oh la la :grin:\n\n$QN_SLACK_MSG"
                 }
             }
         }
