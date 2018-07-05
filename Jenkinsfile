@@ -74,44 +74,6 @@ pipeline {
                 }
             }
         }
-
-        stage('generate docs') {
-            steps {
-                sh '''
-                    cd workspace
-                    doxygen
-                '''
-            }
-
-            post {
-                success {
-                    slackSend color: "$QN_COLOR_SUCCESS", message: "Docs générées\n\n$QN_SLACK_MSG"
-                }
-                failure {
-                    slackSend color: "$QN_COLOR_FAIL", message: "Echec `generate docs`: Oh la la :grin:\n\n$QN_SLACK_MSG"
-                }
-            }
-        }
-
-        stage('collect docs') {
-            when { branch 'master' }
-            steps {
-                sh '''
-                    cd workspace
-                    tar czvf doc.tar.gz doc/html
-                '''
-            }
-
-            post {
-                success {
-                    archive 'workspace/doc.tar.gz'
-                    slackSend color: "$QN_COLOR_SUCCESS", message: "Docs collectées\n\n$QN_SLACK_MSG"
-                }
-                failure {
-                    slackSend color: "$QN_COLOR_FAIL", message: "Echec `collect docs`: Oh la la :grin:\n\n$QN_SLACK_MSG"
-                }
-            }
-        }
     }
     post {
         always {
