@@ -58,7 +58,7 @@ pipeline {
 
             post {
                 always {
-                    junit "workspace/build_release/**/test_results/**/*.xml"
+                    junit 'workspace/build_release/**/test_results/**/*.xml'
                 }
             }
         }
