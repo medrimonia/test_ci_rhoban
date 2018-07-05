@@ -37,10 +37,7 @@ pipeline {
         }
         stage('prepare') {
             steps {
-                sh '''
-                    echo "Starting prepare";
-                    ./prepare.sh
-                    '''
+                sh prepare.sh
             }
             post {
                 failure {
