@@ -23,9 +23,6 @@ pipeline {
                 }
             }
         }
-        stage('Clone workspace') {
-            git url: 'https://github.com/rhoban/workspace.git'
-        }
         stage('prepare') {
             steps {
                 sh prepare.sh
