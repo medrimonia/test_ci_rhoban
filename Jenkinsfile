@@ -41,8 +41,8 @@ pipeline {
                     echo "Starting prepare"
                     cd workspace
                     ./workspace setup
-                    ./workspace install rhoban/utils
-                '''
+                    '''
+                sh "./workspace install rhoban/utils"
             }
             post {
                 failure {
