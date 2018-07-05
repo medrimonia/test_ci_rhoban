@@ -25,7 +25,12 @@ pipeline {
         }
         stage('prepare') {
             steps {
-                sh prepare.sh
+                sh '''
+                    git clone https://github.com/rhoban/workspace.git
+                    cd workspace    
+                    ./workspace setup
+                    ./workspace install rhoban/utils
+                '''
             }
             post {
                 failure {
