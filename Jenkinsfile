@@ -32,17 +32,16 @@ pipeline {
                 }
             }
         }
-
+        stage('Clone workspace') {
+            git url: 'https://github.com/rhoban/workspace.git'
+        }
         stage('prepare') {
             steps {
                 sh '''
                     echo "Starting prepare"
-                    git clone https://github.com/rhoban/workspace.git
                     cd workspace
                     ./workspace setup
                     ./workspace install rhoban/utils
-                    ./workspace build
-                    ./workspace build_tests
                 '''
             }
             post {
@@ -51,7 +50,14 @@ pipeline {
                 }
             }
         }
-
+        stage('build') {
+            steps {
+                sh '''
+                    ./workspace build
+                    ./workspace build_tests
+                    '''
+           }
+        }
         stage('tests') {
             steps {
                 sh '''
