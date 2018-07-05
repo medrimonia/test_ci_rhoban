@@ -38,11 +38,9 @@ pipeline {
         stage('prepare') {
             steps {
                 sh '''
-                    echo "Starting prepare"
-                    cd workspace
-                    ./workspace setup
+                    echo "Starting prepare";
+                    ./prepare.sh
                     '''
-                sh './workspace install rhoban/utils'
             }
             post {
                 failure {
