@@ -41,9 +41,10 @@ pipeline {
         stage('build') {
             steps {
                 sh '''
+                    cd workspace
                     ./workspace build
                     ./workspace build_tests
-                    '''
+                '''
            }
         }
         stage('tests') {
