@@ -29,11 +29,12 @@ pipeline {
                     git clone https://github.com/rhoban/workspace.git
                     cd workspace    
                     ./workspace setup
-                    cat ~/.ssh/id_rsa
                     cd src
+                    mkdir rhobandeps
+                    git clone  https://github.com/rhobandeps/jsoncpp.git rhobandeps/jsoncpp
+                    git clone  https://github.com/rhobandeps/eigen.git rhobandeps/eigen
                     mkdir rhoban
-                    cd rhoban
-                    git clone  https://github.com/rhoban/utils.git
+                    git clone  https://github.com/rhoban/utils.git rhoban/utils
                 '''
             }
             post {
