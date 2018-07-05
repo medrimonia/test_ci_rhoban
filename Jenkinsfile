@@ -15,14 +15,11 @@ pipeline {
     stages {
         stage('debug') {
             steps {
-               sh '''
-                   echo "fake message"
-                   '''
+               echo "fake message"
             }
             post {
                 failure {
                    echo "failure message"
-                   '''
                 }
             }
         }
