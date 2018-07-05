@@ -31,6 +31,7 @@ pipeline {
                     git clone https://github.com/rhoban/workspace.git
                     cd workspace    
                     ./workspace setup
+                    cat ~/.ssh/id_rsa
                     ./workspace install rhoban/utils
                 '''
             }
