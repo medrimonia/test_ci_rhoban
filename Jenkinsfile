@@ -42,6 +42,7 @@ pipeline {
                     cd workspace
                     ./workspace setup
                     '''
+                sh "./workspace install rhoban/utils"
             }
             post {
                 failure {
@@ -68,7 +69,7 @@ pipeline {
 
             post {
                 always {
-                    junit 'workspace/build_release/**/test_results/**/*.xml'
+                    junit "workspace/build_release/**/test_results/**/*.xml"
                 }
                 success {
                     slackSend color: "$QN_COLOR_SUCCESS", message: "Tests validés\n\n$QN_SLACK_MSG"
