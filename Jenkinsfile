@@ -13,16 +13,6 @@ pipeline {
     }
 
     stages {
-        stage('debug') {
-            steps {
-               echo "fake message"
-            }
-            post {
-                failure {
-                   echo "failure message"
-                }
-            }
-        }
         stage('prepare') {
             steps {
                 sh '''
